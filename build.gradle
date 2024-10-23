@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group 'com.nordstrom'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenLocal()
+    maven {
+        url 'https://repo.maven.apache.org/maven2'
+    }
+    maven {
+        url 'https://artifactory.nordstrom.com/artifactory/gradle'
+        credentials {
+            username System.getenv('ARTIFACTORY_USER')
+            password System.getenv('ARTIFACTORY_API_KEY')
+        }
+    }
+    maven {
+        url 'https://artifactory.nordstrom.com/artifactory/maven'
+        credentials {
+            username System.getenv('ARTIFACTORY_USER')
+            password System.getenv('ARTIFACTORY_API_KEY')
+        }
+    }
+    maven {
+        url 'https://plugins.gradle.org/m2/'
+    }
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+}
+
+test {
+    useJUnitPlatform()
+}
